@@ -10,12 +10,14 @@ export default function DemandasPage() {
     <div className="fade-up space-y-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[color:var(--brand)]">
-            Lista interna
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-[color:var(--brand-glow)]">
+            Lista interna / BYD
           </p>
-          <h2 className="brand-mark mt-1 text-[2rem] sm:text-[2.35rem]">Demandas</h2>
+          <h2 className="brand-mark mt-1 text-[2rem] sm:text-[2.45rem]">
+            O que está <span className="text-[color:var(--brand)]">parado.</span>
+          </h2>
           <p className="mt-1 text-[color:var(--ink-soft)]">
-            O que está parado e com quem — piloto {bydTemplate.name}.
+            Bloqueio e waiting-on — piloto {bydTemplate.name}.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

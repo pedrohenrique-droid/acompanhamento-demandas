@@ -1,24 +1,18 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Syne } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { AppShell } from "@/components/AppShell";
 
-const syne = Syne({
-  variable: "--font-syne",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
   title: "Acompanhamento de Demandas · we",
   description:
-    "Beta we.com.br — transparência de status e bloqueio atual, piloto BYD faturamento.",
+    "Beta we.com.br — piloto BYD para destravar o gargalo de faturamento/aprovação.",
 };
 
 export default function RootLayout({
@@ -28,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${syne.variable} ${jakarta.variable} antialiased`}>
+      <body className={`${outfit.variable} antialiased`}>
         <AppShell>{children}</AppShell>
       </body>
     </html>
