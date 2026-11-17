@@ -4,7 +4,11 @@ import { AgoraCard } from "@/components/AgoraCard";
 import { Stepper } from "@/components/Stepper";
 import { Timeline } from "@/components/Timeline";
 import { formatDateTime } from "@/lib/format";
-import { bydTemplate, getDemanda } from "@/lib/seed";
+import {
+  buildProcessTimeline,
+  getDemanda,
+  getTemplate,
+} from "@/lib/seed";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -13,9 +17,11 @@ export default async function ClienteViewPage({ params }: Props) {
   const demanda = getDemanda(id);
   if (!demanda) notFound();
 
-  const lastPublic = [...demanda.timeline]
-    .filter((e) => e.visibleToClient)
-    .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime())[0];
+  const template = getTemplate(demanda.templateId);
+  if (!template) notFound();
+
+  const timeline = buildProcessTimeline(demanda, true);
+  const current = timeline.find((i) => i.state === "current");
 
   return (
     <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-2">
@@ -28,7 +34,7 @@ export default async function ClienteViewPage({ params }: Props) {
         </p>
         <p className="mt-1 text-sm text-[color:var(--muted)]">
           Ref. {demanda.code}
-          {lastPublic ? ` · Atualizado em ${formatDateTime(lastPublic.at)}` : ""}
+          {current?.at ? ` · Atualizado em ${formatDateTime(current.at)}` : ""}
         </p>
       </header>
 
@@ -40,11 +46,11 @@ export default async function ClienteViewPage({ params }: Props) {
           </div>
         ) : null}
         <Stepper
-          stages={bydTemplate.stages}
+          stages={template.stages}
           currentStageId={demanda.stageId}
           clientSafe
         />
-        <Timeline events={demanda.timeline} clientSafe />
+        <Timeline items={timeline} templateName={template.name} clientSafe />
       </div>
 
       <p className="mt-8 text-center text-sm text-[color:var(--ink-soft)]">

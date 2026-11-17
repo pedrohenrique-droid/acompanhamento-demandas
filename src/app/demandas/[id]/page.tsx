@@ -5,7 +5,12 @@ import { DemandaStatusBadge, PrazoBadge } from "@/components/StatusBadge";
 import { Stepper } from "@/components/Stepper";
 import { Timeline } from "@/components/Timeline";
 import { formatDate } from "@/lib/format";
-import { bydTemplate, getDemanda, getStage } from "@/lib/seed";
+import {
+  buildProcessTimeline,
+  getDemanda,
+  getStage,
+  getTemplate,
+} from "@/lib/seed";
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -14,7 +19,11 @@ export default async function DemandaDetailPage({ params }: Props) {
   const demanda = getDemanda(id);
   if (!demanda) notFound();
 
-  const stage = getStage(demanda.stageId);
+  const template = getTemplate(demanda.templateId);
+  if (!template) notFound();
+
+  const stage = getStage(demanda.templateId, demanda.stageId);
+  const timeline = buildProcessTimeline(demanda, false);
   const nextAction = demanda.waitingOn
     ? `Confirmar retorno: ${demanda.waitingOn.reason}`
     : "Avançar estágio";
@@ -36,7 +45,7 @@ export default async function DemandaDetailPage({ params }: Props) {
           </div>
           <p className="mt-1 text-lg text-[color:var(--ink-soft)]">{demanda.title}</p>
           <p className="mt-2 text-sm text-[color:var(--muted)]">
-            {demanda.processType} · {demanda.category} · {demanda.fase} ·{" "}
+            Template: {template.name} · {demanda.category} · {demanda.fase} ·{" "}
             {demanda.amountLabel}
           </p>
         </div>
@@ -79,11 +88,12 @@ export default async function DemandaDetailPage({ params }: Props) {
       </button>
 
       <p className="text-sm font-medium text-[color:var(--ink-soft)]">
-        Estágio atual: <span className="text-[color:var(--ink)]">{stage?.nameInternal}</span>
+        Estágio atual:{" "}
+        <span className="text-[color:var(--ink)]">{stage?.nameInternal}</span>
       </p>
 
-      <Stepper stages={bydTemplate.stages} currentStageId={demanda.stageId} />
-      <Timeline events={demanda.timeline} />
+      <Stepper stages={template.stages} currentStageId={demanda.stageId} />
+      <Timeline items={timeline} templateName={template.name} />
     </div>
   );
 }

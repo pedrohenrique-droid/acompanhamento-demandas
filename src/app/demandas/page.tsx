@@ -74,7 +74,7 @@ export default function DemandasPage() {
         </div>
         <ul>
           {demandas.map((d) => {
-            const stage = getStage(d.stageId);
+            const stage = getStage(d.templateId, d.stageId);
             return (
               <li key={d.id}>
                 <Link

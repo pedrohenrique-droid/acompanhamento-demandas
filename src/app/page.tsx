@@ -59,7 +59,7 @@ export default function HomePage() {
 
           <div className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t border-[color:var(--line)] pt-5 text-sm">
             <div>
-              <p className="text-[1.4rem] font-bold text-[color:var(--ink)]">4</p>
+              <p className="text-[1.4rem] font-bold text-[color:var(--ink)]">5</p>
               <p className="text-[color:var(--muted)]">demandas piloto</p>
             </div>
             <div>
