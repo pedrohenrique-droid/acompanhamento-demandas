@@ -12,9 +12,12 @@ export function Stepper({ stages, currentStageId, clientSafe = false }: Props) {
 
   return (
     <section className="panel p-5 fade-up" style={{ animationDelay: "80ms" }}>
-      <p className="text-[0.72rem] font-bold uppercase tracking-[0.14em] text-[color:var(--brand)]">
-        Processo
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[color:var(--brand)]">
+          Processo
+        </p>
+        <span className="badge badge-process">Etapa {currentOrder} de {visible.length}</span>
+      </div>
       <div className="stepper mt-4">
         {visible.map((stage) => {
           const state =

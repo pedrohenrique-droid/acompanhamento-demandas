@@ -15,6 +15,9 @@ export default async function DemandaDetailPage({ params }: Props) {
   if (!demanda) notFound();
 
   const stage = getStage(demanda.stageId);
+  const nextAction = demanda.waitingOn
+    ? `Confirmar retorno: ${demanda.waitingOn.reason}`
+    : "Avançar estágio";
 
   return (
     <div className="space-y-4">
@@ -27,48 +30,57 @@ export default async function DemandaDetailPage({ params }: Props) {
             ← Demandas
           </Link>
           <div className="mt-2 flex flex-wrap items-center gap-2">
-            <h2 className="brand-mark text-3xl">{demanda.code}</h2>
+            <h2 className="brand-mark text-[2rem] sm:text-[2.3rem]">{demanda.code}</h2>
             <DemandaStatusBadge status={demanda.status} />
             <PrazoBadge status={demanda.prazoStatus} />
           </div>
           <p className="mt-1 text-lg text-[color:var(--ink-soft)]">{demanda.title}</p>
-          <p className="mt-2 text-sm text-[color:var(--ink-soft)]">
+          <p className="mt-2 text-sm text-[color:var(--muted)]">
             {demanda.processType} · {demanda.category} · {demanda.fase} ·{" "}
             {demanda.amountLabel}
           </p>
-          <p className="mt-1 text-sm text-[color:var(--ink-soft)]">
-            Responsável: {demanda.owner} · Cliente-facing: {demanda.clientFacing} ·
-            Prazo {formatDate(demanda.prazo)}
-          </p>
-          <p className="mt-1 text-sm font-medium">Estágio atual: {stage?.nameInternal}</p>
         </div>
-        <Link
-          href={`/demandas/${demanda.id}/cliente`}
-          className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2 text-sm font-semibold transition hover:border-[color:var(--brand)]"
-        >
+        <Link href={`/demandas/${demanda.id}/cliente`} className="btn-ghost">
           Ver como cliente vê
         </Link>
+      </div>
+
+      <div className="meta-grid fade-up">
+        <div className="meta-card">
+          <p className="label">Responsável</p>
+          <p className="value">{demanda.owner}</p>
+        </div>
+        <div className="meta-card">
+          <p className="label">Cliente-facing</p>
+          <p className="value">{demanda.clientFacing}</p>
+        </div>
+        <div className="meta-card">
+          <p className="label">Prazo</p>
+          <p className="value">{formatDate(demanda.prazo)}</p>
+        </div>
       </div>
 
       <AgoraCard
         waitingOn={demanda.waitingOn}
         actions={
           <>
-            <button
-              type="button"
-              className="rounded-full bg-[color:var(--brand)] px-4 py-2 text-sm font-semibold text-white opacity-90"
-            >
+            <button type="button" className="btn-primary">
               Lembrar
             </button>
-            <button
-              type="button"
-              className="rounded-full border border-[color:var(--line)] bg-white/80 px-4 py-2 text-sm font-semibold"
-            >
+            <button type="button" className="btn-ghost">
               Registrar retorno
             </button>
           </>
         }
       />
+
+      <button type="button" className="cta-soft">
+        {nextAction}
+      </button>
+
+      <p className="text-sm font-medium text-[color:var(--ink-soft)]">
+        Estágio atual: <span className="text-[color:var(--ink)]">{stage?.nameInternal}</span>
+      </p>
 
       <Stepper stages={bydTemplate.stages} currentStageId={demanda.stageId} />
       <Timeline events={demanda.timeline} />

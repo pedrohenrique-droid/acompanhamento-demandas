@@ -12,6 +12,11 @@ export function PrazoBadge({ status }: { status: PrazoStatus }) {
 }
 
 export function DemandaStatusBadge({ status }: { status: string }) {
-  const cls = status === "aguardando" ? "badge-wait" : "badge-neutral";
+  const cls =
+    status === "aguardando"
+      ? "badge-wait"
+      : status === "em_andamento"
+        ? "badge-process"
+        : "badge-neutral";
   return <span className={`badge ${cls}`}>{statusLabel(status)}</span>;
 }

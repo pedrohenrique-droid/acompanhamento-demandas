@@ -11,22 +11,22 @@ export default function BydTemplateAdminPage() {
         >
           ← Demandas
         </Link>
-        <p className="mt-2 text-[0.72rem] font-bold uppercase tracking-[0.16em] text-[color:var(--brand)]">
+        <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.14em] text-[color:var(--brand)]">
           Admin leve
         </p>
-        <h2 className="brand-mark mt-1 text-3xl">{bydTemplate.name}</h2>
+        <h2 className="brand-mark mt-1 text-[2rem] sm:text-[2.35rem]">{bydTemplate.name}</h2>
         <p className="mt-2 max-w-3xl text-[color:var(--ink-soft)]">
           {bydTemplate.description}
         </p>
       </div>
 
       <section className="panel overflow-hidden">
-        <div className="border-b border-[color:var(--line)] px-4 py-3">
+        <div className="table-head border-b border-[color:var(--line)] px-4 py-3">
           <h3 className="font-semibold">Estágios do template</h3>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] text-left text-sm">
-            <thead className="bg-white/50 text-[0.72rem] uppercase tracking-[0.06em] text-[color:var(--ink-soft)]">
+            <thead className="text-[0.7rem] uppercase tracking-[0.06em] text-[color:var(--ink-soft)]">
               <tr>
                 <th className="px-4 py-3 font-bold">#</th>
                 <th className="px-4 py-3 font-bold">Nome interno</th>
@@ -39,8 +39,10 @@ export default function BydTemplateAdminPage() {
             <tbody>
               {bydTemplate.stages.map((s) => (
                 <tr key={s.id} className="border-t border-[color:var(--line)]">
-                  <td className="px-4 py-3 font-semibold">{s.order}</td>
-                  <td className="px-4 py-3">{s.nameInternal}</td>
+                  <td className="px-4 py-3 font-semibold text-[color:var(--brand)]">
+                    {s.order}
+                  </td>
+                  <td className="px-4 py-3 font-medium">{s.nameInternal}</td>
                   <td className="px-4 py-3 text-[color:var(--ink-soft)]">
                     {s.nameClientSafe}
                   </td>
@@ -69,22 +71,22 @@ export default function BydTemplateAdminPage() {
               className="panel-tight grid gap-1 px-4 py-3 sm:grid-cols-[1.2fr_1.2fr_0.7fr]"
             >
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[color:var(--ink-soft)]">
+                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[color:var(--muted)]">
                   Interno
                 </p>
                 <p className="font-medium">{w.reason}</p>
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[color:var(--ink-soft)]">
+                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[color:var(--muted)]">
                   Cliente-safe
                 </p>
                 <p>{w.reasonClientSafe}</p>
               </div>
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[color:var(--ink-soft)]">
+                <p className="text-xs font-bold uppercase tracking-[0.08em] text-[color:var(--muted)]">
                   Âncora SLA
                 </p>
-                <p className="font-medium text-[color:var(--accent)]">{w.slaAnchor}</p>
+                <p className="font-semibold text-[color:var(--brand)]">{w.slaAnchor}</p>
               </div>
             </li>
           ))}
