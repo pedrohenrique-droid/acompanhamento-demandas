@@ -9,12 +9,12 @@ export default function HomePage() {
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(520px 260px at 90% 10%, rgba(47,107,255,0.14), transparent 60%), radial-gradient(360px 200px at 0% 90%, rgba(18,164,84,0.08), transparent 55%)",
+              "radial-gradient(520px 260px at 90% 10%, rgba(227,30,36,0.12), transparent 60%), radial-gradient(360px 200px at 0% 90%, rgba(0,0,0,0.04), transparent 55%)",
           }}
         />
         <div className="relative max-w-2xl">
           <p className="text-[0.72rem] font-bold uppercase tracking-[0.18em] text-[color:var(--brand)]">
-            Piloto BYD · Faturamento
+            we.com.br · Piloto BYD
           </p>
           <h2 className="brand-mark mt-3 text-[2.35rem] leading-[1.05] text-[color:var(--ink)] sm:text-[3rem]">
             Acompanhamento de Demandas

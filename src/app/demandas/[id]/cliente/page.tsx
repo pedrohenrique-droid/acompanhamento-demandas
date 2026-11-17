@@ -18,15 +18,14 @@ export default async function ClienteViewPage({ params }: Props) {
     .sort((a, b) => new Date(b.at).getTime() - new Date(a.at).getTime())[0];
 
   return (
-    <div className="mx-auto min-h-screen w-full max-w-3xl px-5 py-8">
+    <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-2">
       <header className="fade-up mb-6">
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-[color:var(--brand)]">
           Portal do cliente · visão sanitizada
         </p>
-        <h1 className="brand-mark mt-2 text-[2rem] leading-tight sm:text-[2.35rem]">
-          Acompanhamento de Demandas
-        </h1>
-        <p className="mt-2 text-[color:var(--ink-soft)]">{demanda.titlePublic}</p>
+        <p className="mt-2 text-lg font-semibold text-[color:var(--ink)]">
+          {demanda.titlePublic}
+        </p>
         <p className="mt-1 text-sm text-[color:var(--muted)]">
           Ref. {demanda.code}
           {lastPublic ? ` · Atualizado em ${formatDateTime(lastPublic.at)}` : ""}

@@ -16,9 +16,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Acompanhamento de Demandas · WE",
+  title: "Acompanhamento de Demandas · we",
   description:
-    "Beta — transparência de status e bloqueio atual para processos WE, piloto BYD faturamento.",
+    "Beta we.com.br — transparência de status e bloqueio atual, piloto BYD faturamento.",
 };
 
 export default function RootLayout({
